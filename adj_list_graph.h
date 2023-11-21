@@ -1,28 +1,31 @@
 #ifndef ALGRAPH
 #define ALGRAPH
 
-#include "vertex_data.h" // used elsewhere -> might cause problems later
-
-#include <iostream>
 #include <utility>
-#include <algorithm>
-#include <boost/graph/graph_traits.hpp>
+#include <iostream>
 #include <boost/graph/adjacency_list.hpp>
 
-typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, vertexData> adjListGraphInternal;
-typedef boost::graph_traits<adjListGraphInternal>::vertex_descriptor vertex;
-typedef boost::property_map<adjListGraphInternal, boost::vertex_index_t>::type vertexIndexMap;
+typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, boost::no_property, boost::property<boost::edge_weight_t, double>> listGraphInternal;
+typedef boost::graph_traits<listGraphInternal>::vertex_descriptor vertex;
+typedef boost::graph_traits<listGraphInternal>::edge_descriptor edge;
+typedef boost::graph_traits<listGraphInternal>::vertex_iterator vIter;
+typedef boost::graph_traits<listGraphInternal>::edge_iterator eIter;
+typedef boost::property_map<listGraphInternal, boost::vertex_index_t>::type vertexIndexMap;
 
-class adjListGraph {
+class listGraph {
 	private:
-		adjListGraphInternal thisGraph;
+		listGraphInternal thisGraph;
 	public:
 		// Constructors
-		adjListGraph();
-		adjListGraph(int VertexAmount);
+		listGraph();
+		listGraph(int VertexAmount);
 
 		// Wrappers for boost funcions
-		void addVertex(vertexData d);
+		vertex addVertex();
+		std::pair<edge, bool> addEdge(vertex V1, vertex V2, double weight);
+		std::pair<vIter, vIter> getVertexIterator();
+		std::pair<eIter, eIter> getEdgeIterator();
+		vertexIndexMap getVertexIndexMap();
 };
 
 #endif
