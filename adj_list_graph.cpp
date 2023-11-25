@@ -30,6 +30,22 @@ vertexIndexMap listGraph::getVertexIndexMap(){
 	return boost::get(boost::vertex_index, thisGraph);
 };
 
+vertex listGraph::source(edge e){
+	return boost::source(e, thisGraph);
+};
+
+vertex listGraph::target(edge e){
+	return boost::target(e, thisGraph);
+};
+
+double listGraph::getEdgeWeight(edge e){
+//	return boost::get(boost::edge_weight, thisGraph)[boost::source(e, thisGraph)];
+//	boost::property_map<listGraphInternal, boost::edge_weight_t>::type eWMap;
+//	eWMap = boost::get(boost::edge_weight, thisGraph);
+//	double xd = boost::get(boost::edge_weight, thisGraph, e);
+	return boost::get(boost::edge_weight, thisGraph, e);
+};
+
 // Only for testing within this file
 int main() {
 	// Crating a graph
@@ -83,15 +99,33 @@ int main() {
 
 	// Iterating through vertices
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	std::pair<vIter, vIter> vItrtr; // where the data structure used for iterating through the data is stored
+	std::pair<vIter, vIter> vItrtr; // where the data structure used for iterating through the vertex data is stored
 	for (vItrtr = lg1.getVertexIterator(); vItrtr.first != vItrtr.second; vItrtr.first++){
 		std::cout << alphabet[lg1vIndices[*vItrtr.first]] << " " ;
-		//std::cout << alphabet[i] << " " ;
+		//std::cout << alphabet[i] << " " ; // This can also be used to iterate through vertices (no map)
 	}
 	std::cout << "\n";
 
-	// Iterating through vertices
-//	std::pair<eIter, eIter>
+	// Iterating through edges
+	std::pair<eIter, eIter> eItrtr; // where the data structure used for iterating through the edge data is stored
+	for (eItrtr = lg1.getEdgeIterator(); eItrtr.first != eItrtr.second; eItrtr.first++){
+		std::cout
+			<< "("
+			<< alphabet[
+				lg1vIndices[
+					lg1.source(*eItrtr.first)
+				]
+			   ]
+			<< ","
+			<< alphabet[
+				lg1vIndices[
+					lg1.target(*eItrtr.first)
+				]
+			   ]
+			<< ")"
+			<< "\n"
+		;
+	}
 
 	return 0;
 }

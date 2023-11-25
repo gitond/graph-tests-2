@@ -26,6 +26,9 @@ class listGraph {
 		std::pair<vIter, vIter> getVertexIterator();
 		std::pair<eIter, eIter> getEdgeIterator();
 		vertexIndexMap getVertexIndexMap();
+		vertex source(edge e);
+		vertex target(edge e);
+		double getEdgeWeight(edge e);
 };
 
 #endif
