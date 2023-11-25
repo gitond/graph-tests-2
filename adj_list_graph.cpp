@@ -10,6 +10,7 @@ listGraph::listGraph(int VertexAmount){
 	listGraphInternal thisGraph(VertexAmount);
 };
 
+// Wrappers for boost functions
 vertex listGraph::addVertex(){
 	return boost::add_vertex(thisGraph);
 };
@@ -39,11 +40,15 @@ vertex listGraph::target(edge e){
 };
 
 double listGraph::getEdgeWeight(edge e){
-//	return boost::get(boost::edge_weight, thisGraph)[boost::source(e, thisGraph)];
-//	boost::property_map<listGraphInternal, boost::edge_weight_t>::type eWMap;
-//	eWMap = boost::get(boost::edge_weight, thisGraph);
-//	double xd = boost::get(boost::edge_weight, thisGraph, e);
 	return boost::get(boost::edge_weight, thisGraph, e);
+};
+
+std::pair<oEIter, oEIter> listGraph::outEdges(vertex v){
+	return boost::out_edges(v, thisGraph);
+};
+
+std::pair<aIter, aIter> listGraph::adjacentVertices(vertex v){
+	return boost::adjacent_vertices(v, thisGraph);
 };
 
 // Only for testing within this file
@@ -100,14 +105,43 @@ int main() {
 	// Iterating through vertices
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	std::pair<vIter, vIter> vItrtr; // where the data structure used for iterating through the vertex data is stored
+	std::pair<aIter, aIter> aItrtr; // where the data structure used for iterating through the adjacency data is stored
+	std::pair<oEIter, oEIter> oEItrtr; // where the data structure used for iterating through each edge leaving the vertex
 	for (vItrtr = lg1.getVertexIterator(); vItrtr.first != vItrtr.second; vItrtr.first++){
-		std::cout << alphabet[lg1vIndices[*vItrtr.first]] << " " ;
+		std::cout << alphabet[lg1vIndices[*vItrtr.first]] << " Connected to: \n" ;
 		//std::cout << alphabet[i] << " " ; // This can also be used to iterate through vertices (no map)
+
+		// Iterating through vertices adjacent to this one
+		for (aItrtr = lg1.adjacentVertices(*vItrtr.first); aItrtr.first != aItrtr.second; aItrtr.first++){
+			std::cout << alphabet[lg1vIndices[*aItrtr.first]] << " " ;
+		}
+		std::cout << "Through: \n" ;
+
+		// Iterating through edges leaving this vertex
+		for (oEItrtr = lg1.outEdges(*vItrtr.first); oEItrtr.first != oEItrtr.second; oEItrtr.first++){
+			std::cout
+			<< "("
+			<< alphabet[
+				lg1vIndices[
+					lg1.source(*oEItrtr.first)
+				]
+			   ]
+			<< ","
+			<< alphabet[
+				lg1vIndices[
+					lg1.target(*oEItrtr.first)
+				]
+			   ]
+			<< ") : "
+			<< lg1.getEdgeWeight(*oEItrtr.first)
+			<< "\n"
+			;
+		}
 	}
 	std::cout << "\n";
 
-	// Iterating through edges
-	std::pair<eIter, eIter> eItrtr; // where the data structure used for iterating through the edge data is stored
+	// Iterating through all edges of graph
+/*	std::pair<eIter, eIter> eItrtr; // where the data structure used for iterating through the edge data is stored
 	for (eItrtr = lg1.getEdgeIterator(); eItrtr.first != eItrtr.second; eItrtr.first++){
 		std::cout
 			<< "("
@@ -122,10 +156,12 @@ int main() {
 					lg1.target(*eItrtr.first)
 				]
 			   ]
-			<< ")"
+			<< ") : "
+			<< lg1.getEdgeWeight(*eItrtr.first)
 			<< "\n"
 		;
 	}
+*/
 
 	return 0;
 }
