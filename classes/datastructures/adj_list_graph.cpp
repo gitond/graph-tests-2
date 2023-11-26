@@ -1,3 +1,4 @@
+#include "../../meta.h"
 #include "adj_list_graph.h"
 
 // listGraph -datatype behavior

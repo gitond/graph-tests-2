@@ -1,3 +1,4 @@
+#include "meta.h"
 #include "classes/datastructures/adj_list_graph.h"
 
 int main() {

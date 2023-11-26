@@ -1,8 +1,6 @@
 #ifndef ALGRAPH
 #define ALGRAPH
 
-#include <utility>
-#include <iostream>
 #include <boost/graph/adjacency_list.hpp>
 
 // Graph
