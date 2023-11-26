@@ -52,8 +52,20 @@ std::pair<aIter, aIter> listGraph::adjacentVertices(vertex v){
 	return boost::adjacent_vertices(v, thisGraph);
 };
 
-// Only for testing within this file
+// Other functions
+std::vector<vertex> listGraph::getVertexReferenceVector(){
+	std::vector<vertex> v;
 
+	// Looping through vertices and putting them each into v
+	std::pair<vIter, vIter> iterator;
+	for (iterator = vertices(thisGraph); iterator.first != iterator.second; iterator.first++){
+		v.push_back(*iterator.first);
+	}
+
+	return v;
+};
+
+// Only for testing within this file
 /*
 int main() {
 	// Relevant tests here

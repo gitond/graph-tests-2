@@ -5,6 +5,9 @@ int main() {
 	// Crating a graph
 	listGraph lg1 = listGraph();
 
+	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // For easier printing during tests
+	vertexIndexMap lg1vIndices = lg1.getVertexIndexMap(); // For easier loopthrough
+
 	// Adding vertices
 	vertex A = lg1.addVertex();
 	vertex B = lg1.addVertex();
@@ -22,6 +25,14 @@ int main() {
 	vertex N = lg1.addVertex();
 	vertex O = lg1.addVertex();
 	vertex P = lg1.addVertex();
+
+	// Vertex references to std::vector test
+	std::vector<vertex> vSet = lg1.getVertexReferenceVector(); // Creation
+	// Iteration
+	for (auto vecItrtr = vSet.begin(); vecItrtr != vSet.end(); vecItrtr++){
+		std::cout << alphabet[lg1vIndices[*vecItrtr]] << " ";
+	}
+	std::cout << "\n";
 
 	// Adding edges
 	std::pair<edge, bool> AB = lg1.addEdge(A,B,1);
@@ -49,11 +60,8 @@ int main() {
 	std::pair<edge, bool> MP = lg1.addEdge(M,P,1);
 	std::pair<edge, bool> NP = lg1.addEdge(N,P,1);
 
-	vertexIndexMap lg1vIndices = lg1.getVertexIndexMap(); // For easier loopthrough
-
 	// Iterating through vertices
-	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	std::pair<vIter, vIter> vItrtr; // where the data structure used for iterating through the vertex data is stored
+/*	std::pair<vIter, vIter> vItrtr; // where the data structure used for iterating through the vertex data is stored
 	std::pair<aIter, aIter> aItrtr; // where the data structure used for iterating through the adjacency data is stored
 	std::pair<oEIter, oEIter> oEItrtr; // where the data structure used for iterating through each edge leaving the vertex
 	for (vItrtr = lg1.getVertexIterator(); vItrtr.first != vItrtr.second; vItrtr.first++){
