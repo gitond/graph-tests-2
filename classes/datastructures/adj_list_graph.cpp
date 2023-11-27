@@ -61,7 +61,7 @@ std::vector<vertex> listGraph::getVertexReferenceVector(){
 	for (iterator = vertices(thisGraph); iterator.first != iterator.second; iterator.first++){
 		v.push_back(*iterator.first);
 	}
-
+	v.shrink_to_fit();
 	return v;
 };
 
