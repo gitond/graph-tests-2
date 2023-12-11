@@ -1,9 +1,11 @@
 #include "meta.h"
 #include "classes/datastructures/adj_list_graph.h"
+#include "classes/datastructures/adj_matrix_graph.h"
 
 int main() {
 	// Crating a graph
-	listGraph lg1 = listGraph();
+	listGraph lg1 = listGraph(16);
+	matrixGraph mg1 = matrixGraph(16);
 
 	// Adding vertices
 	vertex A = lg1.addVertex();

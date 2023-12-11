@@ -3,9 +3,11 @@
 
 // listGraph -datatype behavior
 // Constructors
+/*
 listGraph::listGraph(){
 	listGraphInternal thisGraph;
 };
+*/
 
 listGraph::listGraph(int VertexAmount){
 	listGraphInternal thisGraph(VertexAmount);

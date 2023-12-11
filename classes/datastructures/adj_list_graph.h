@@ -21,7 +21,7 @@ class listGraph {
 		listGraphInternal thisGraph;
 	public:
 		// Constructors
-		listGraph();
+//		listGraph();	// To achieve having the same interface as the matrix graph, this shouldn't be used
 		listGraph(int VertexAmount);
 
 		// Wrappers for boost funcions
