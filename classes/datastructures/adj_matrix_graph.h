@@ -23,6 +23,10 @@ class matrixGraph {
 	public:
 		// Constructors
 		matrixGraph(int VertexAmount);
+		// Functions
+		mVertex addVertex();
+		// Wrappers for boost functions
+		std::pair<mEdge, bool> addEdge(mVertex V1, mVertex V2, double weight);
 };
 
 #endif
