@@ -5,8 +5,7 @@
 
 
 // Graph
-typedef boost::adjacency_matrix <boost::directedS> matrixGraphInternal;
-//typedef boost::adjacency_matrix<boost::undirectedS, boost::no_property, boost::property<boost::edge_weight_t, double>> matrixGraphInternal;
+typedef boost::adjacency_matrix<boost::undirectedS, boost::no_property, boost::property<boost::edge_weight_t, double>> matrixGraphInternal;
 // Descriptors
 typedef boost::graph_traits<matrixGraphInternal>::vertex_descriptor mVertex;
 typedef boost::graph_traits<matrixGraphInternal>::edge_descriptor mEdge;
