@@ -26,6 +26,14 @@ std::pair<mVIter, mVIter> matrixGraph::getVertexIterator(){
 	return vertices(thisGraph);
 };
 
+std::pair<mEIter, mEIter> matrixGraph::getEdgeIterator(){
+	return edges(thisGraph);
+};
+
+std::pair<mOEIter, mOEIter> matrixGraph::outEdges(mVertex v){
+	return boost::out_edges(v, thisGraph);
+};
+
 /*
 int main() {
 	// Relevant tests here
@@ -80,16 +88,22 @@ int main() {
 	// Attempt at looping through vertices
 	// Helping variables:
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // For printing
-	int i = 0; // Loop count variable
 	std::pair<mVIter,mVIter> vItrtr;  // where the data structure used for iterating through the vertex data is stored
 
-	// Looping through vertices
+	// The loop
 	for(vItrtr = mg1.getVertexIterator(); vItrtr.first != vItrtr.second; vItrtr.first++){
-		std::cout << alphabet[i]  << " " ; // This can also be used to iterate through vertices (no map)
-		i++;
+		std::cout << alphabet[*vItrtr.first]  << " " ; // This can also be used to iterate through vertices (no map)
+
+		// Iterating through edges leaving this vertex
+		mOEIter oEItrtr;
+		oEItrtr = mg1.outEdges(*(vItrtr.first)); // Weird error here:	 error: no match for ‘operator=’
 	}
 
 	std::cout << "\n";
 	return 0;
+
+	// Attempt at looping through edges
+	// Helping variables:
+	std::pair<mEIter, mEIter> eItrtr = mg1.getEdgeIterator();
 }
 */

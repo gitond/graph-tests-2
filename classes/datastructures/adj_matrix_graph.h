@@ -28,6 +28,8 @@ class matrixGraph {
 		// Wrappers for boost functions
 		std::pair<mEdge, bool> addEdge(mVertex V1, mVertex V2, double weight);
 		std::pair<mVIter,mVIter> getVertexIterator();
+		std::pair<mEIter,mEIter> getEdgeIterator();
+		std::pair<mOEIter,mOEIter> outEdges(mVertex v);
 };
 
 #endif
