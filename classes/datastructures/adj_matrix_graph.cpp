@@ -22,6 +22,10 @@ std::pair<mEdge, bool> matrixGraph::addEdge(mVertex V1, mVertex V2, double weigh
 	return boost::add_edge(V1,V2,weight,thisGraph);
 };
 
+std::pair<mVIter, mVIter> matrixGraph::getVertexIterator(){
+	return vertices(thisGraph);
+};
+
 /*
 int main() {
 	// Relevant tests here
@@ -47,8 +51,7 @@ int main() {
 	mVertex mO = mg1.addVertex(14);
 	mVertex mP = mg1.addVertex(15);
 
-	// addEdge segfaults if running more than once I don't know why
-	// Probably problem with memory management. Read into it more?
+	// addEdge() works fine too, issue with segfaulting has been fixed
 	std::pair<mEdge, bool> AB_M = mg1.addEdge(mA,mB,1);
 	std::pair<mEdge, bool> AC_M = mg1.addEdge(mA,mC,1);
 	std::pair<mEdge, bool> BD_M = mg1.addEdge(mB,mD,2);
@@ -74,15 +77,19 @@ int main() {
 	std::pair<mEdge, bool> MP_M = mg1.addEdge(mM,mP,1);
 	std::pair<mEdge, bool> NP_M = mg1.addEdge(mN,mP,1);
 
+	// Attempt at looping through vertices
+	// Helping variables:
+	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // For printing
+	int i = 0; // Loop count variable
+	std::pair<mVIter,mVIter> vItrtr;  // where the data structure used for iterating through the vertex data is stored
 
+	// Looping through vertices
+	for(vItrtr = mg1.getVertexIterator(); vItrtr.first != vItrtr.second; vItrtr.first++){
+		std::cout << alphabet[i]  << " " ; // This can also be used to iterate through vertices (no map)
+		i++;
+	}
 
-	// Attempt to add edges using enums such as in the documentation https://www.boost.org/doc/libs/1_84_0/libs/graph/doc/adjacency_matrix.html
-	// Doesn't compile: (no boost::add_edge function for (enum, enum, double, martixGraph))
-/*	enum { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P };
-
-	boost::add_edge(A,B,1.0,mg1);
-*/
-/*
+	std::cout << "\n";
 	return 0;
 }
 */
