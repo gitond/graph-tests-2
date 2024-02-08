@@ -25,7 +25,7 @@ class listGraph {
 		listGraph(int VertexAmount);
 
 		// Wrappers for boost funcions
-		vertex addVertex();
+		vertex addVertex(int vertexNo);
 		std::pair<edge, bool> addEdge(vertex V1, vertex V2, double weight);
 		std::pair<vIter, vIter> getVertexIterator();
 		std::pair<eIter, eIter> getEdgeIterator();

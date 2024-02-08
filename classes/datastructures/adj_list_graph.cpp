@@ -14,8 +14,10 @@ listGraph::listGraph(int VertexAmount){
 };
 
 // Wrappers for boost functions
-vertex listGraph::addVertex(){
-	return boost::add_vertex(thisGraph);
+vertex listGraph::addVertex(int vertexNo){
+	vertex thisVert = boost::add_vertex(thisGraph);
+	thisVert = vertexNo;
+	return thisVert;
 };
 
 std::pair<edge, bool> listGraph::addEdge(vertex V1, vertex V2, double weight){

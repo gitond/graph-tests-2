@@ -11,8 +11,9 @@ matrixGraph::matrixGraph(int VertexAmount):
 	};
 
 // Functions
-mVertex matrixGraph::addVertex(){
+mVertex matrixGraph::addVertex(int vertexNo){
 	mVertex thisVert;
+	thisVert = vertexNo;
 	return thisVert;
 };
 
@@ -21,35 +22,34 @@ std::pair<mEdge, bool> matrixGraph::addEdge(mVertex V1, mVertex V2, double weigh
 	return boost::add_edge(V1,V2,weight,thisGraph);
 };
 
-
+/*
 int main() {
 	// Relevant tests here
 
 	// Experiments with matrix graphs
 	matrixGraph mg1 = matrixGraph(16);	// Constructor ok, this works
 
-	// "addVertex() command works, no problem here
-	mVertex mA = mg1.addVertex();
-	mVertex mB = mg1.addVertex();
-	mVertex mC = mg1.addVertex();
-	mVertex mD = mg1.addVertex();
-	mVertex mE = mg1.addVertex();
-	mVertex mF = mg1.addVertex();
-	mVertex mG = mg1.addVertex();
-	mVertex mH = mg1.addVertex();
-	mVertex mI = mg1.addVertex();
-	mVertex mJ = mg1.addVertex();
-	mVertex mK = mg1.addVertex();
-	mVertex mL = mg1.addVertex();
-	mVertex mM = mg1.addVertex();
-	mVertex mN = mg1.addVertex();
-	mVertex mO = mg1.addVertex();
-	mVertex mP = mg1.addVertex();
-
+	// addVertex() command works, no problem here
+	mVertex mA = mg1.addVertex(0);
+	mVertex mB = mg1.addVertex(1);
+	mVertex mC = mg1.addVertex(2);
+	mVertex mD = mg1.addVertex(3);
+	mVertex mE = mg1.addVertex(4);
+	mVertex mF = mg1.addVertex(5);
+	mVertex mG = mg1.addVertex(6);
+	mVertex mH = mg1.addVertex(7);
+	mVertex mI = mg1.addVertex(8);
+	mVertex mJ = mg1.addVertex(9);
+	mVertex mK = mg1.addVertex(10);
+	mVertex mL = mg1.addVertex(11);
+	mVertex mM = mg1.addVertex(12);
+	mVertex mN = mg1.addVertex(13);
+	mVertex mO = mg1.addVertex(14);
+	mVertex mP = mg1.addVertex(15);
 
 	// addEdge segfaults if running more than once I don't know why
 	// Probably problem with memory management. Read into it more?
-/*	std::pair<mEdge, bool> AB_M = mg1.addEdge(mA,mB,1);
+	std::pair<mEdge, bool> AB_M = mg1.addEdge(mA,mB,1);
 	std::pair<mEdge, bool> AC_M = mg1.addEdge(mA,mC,1);
 	std::pair<mEdge, bool> BD_M = mg1.addEdge(mB,mD,2);
 	std::pair<mEdge, bool> BE_M = mg1.addEdge(mB,mE,1);
@@ -73,7 +73,7 @@ int main() {
 	std::pair<mEdge, bool> MO_M = mg1.addEdge(mM,mO,1);
 	std::pair<mEdge, bool> MP_M = mg1.addEdge(mM,mP,1);
 	std::pair<mEdge, bool> NP_M = mg1.addEdge(mN,mP,1);
-*/
+
 
 
 	// Attempt to add edges using enums such as in the documentation https://www.boost.org/doc/libs/1_84_0/libs/graph/doc/adjacency_matrix.html
@@ -82,7 +82,7 @@ int main() {
 
 	boost::add_edge(A,B,1.0,mg1);
 */
-
+/*
 	return 0;
 }
-
+*/

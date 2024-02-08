@@ -7,22 +7,22 @@ int main() {
 	listGraph lg1 = listGraph(16);
 
 	// Adding vertices
-	vertex A = lg1.addVertex();
-	vertex B = lg1.addVertex();
-	vertex C = lg1.addVertex();
-	vertex D = lg1.addVertex();
-	vertex E = lg1.addVertex();
-	vertex F = lg1.addVertex();
-	vertex G = lg1.addVertex();
-	vertex H = lg1.addVertex();
-	vertex I = lg1.addVertex();
-	vertex J = lg1.addVertex();
-	vertex K = lg1.addVertex();
-	vertex L = lg1.addVertex();
-	vertex M = lg1.addVertex();
-	vertex N = lg1.addVertex();
-	vertex O = lg1.addVertex();
-	vertex P = lg1.addVertex();
+	vertex A = lg1.addVertex(0);
+	vertex B = lg1.addVertex(1);
+	vertex C = lg1.addVertex(2);
+	vertex D = lg1.addVertex(3);
+	vertex E = lg1.addVertex(4);
+	vertex F = lg1.addVertex(5);
+	vertex G = lg1.addVertex(6);
+	vertex H = lg1.addVertex(7);
+	vertex I = lg1.addVertex(8);
+	vertex J = lg1.addVertex(9);
+	vertex K = lg1.addVertex(10);
+	vertex L = lg1.addVertex(11);
+	vertex M = lg1.addVertex(12);
+	vertex N = lg1.addVertex(13);
+	vertex O = lg1.addVertex(14);
+	vertex P = lg1.addVertex(15);
 
 	// Adding edges
 	std::pair<edge, bool> AB = lg1.addEdge(A,B,1);
