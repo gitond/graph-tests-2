@@ -34,7 +34,26 @@ std::pair<mOEIter, mOEIter> matrixGraph::outEdges(mVertex v){
 	return boost::out_edges(v, thisGraph);
 };
 
-/*
+std::pair<mAIter, mAIter> matrixGraph::adjacentVertices(mVertex v){
+	return boost::adjacent_vertices(v, thisGraph);
+};
+
+mVertexIndexMap matrixGraph::getVertexIndexMap(){
+	return boost::get(boost::vertex_index, thisGraph);
+};
+
+mVertex matrixGraph::source(mEdge e){
+	return boost::source(e, thisGraph);
+};
+
+mVertex matrixGraph::target(mEdge e){
+	return boost::target(e, thisGraph);
+};
+
+double matrixGraph::getEdgeWeight(mEdge e){
+	return boost::get(boost::edge_weight, thisGraph, e);
+};
+
 int main() {
 	// Relevant tests here
 
@@ -85,25 +104,71 @@ int main() {
 	std::pair<mEdge, bool> MP_M = mg1.addEdge(mM,mP,1);
 	std::pair<mEdge, bool> NP_M = mg1.addEdge(mN,mP,1);
 
+	mVertexIndexMap mg1vIndices = mg1.getVertexIndexMap();
+
 	// Attempt at looping through vertices
 	// Helping variables:
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // For printing
 	std::pair<mVIter,mVIter> vItrtr;  // where the data structure used for iterating through the vertex data is stored
-
+	std::pair<mOEIter, mOEIter> oEItrtr; // where the data structure used for iterating through each edge leaving the vertex
+	std::pair<mAIter, mAIter> aItrtr; // where the data structure used for iterating through the adjacency data is stored
 	// The loop
 	for(vItrtr = mg1.getVertexIterator(); vItrtr.first != vItrtr.second; vItrtr.first++){
-		std::cout << alphabet[*vItrtr.first]  << " " ; // This can also be used to iterate through vertices (no map)
+		std::cout << alphabet[mg1vIndices[*vItrtr.first]]  << "\n" << "Connected to: " ; // This can also be used to iterate through vertices (no map)
+
+		// Iterating through vertices adjacent to this one
+		for (aItrtr = mg1.adjacentVertices(*vItrtr.first); aItrtr.first != aItrtr.second; aItrtr.first++){
+			std::cout << alphabet[mg1vIndices[*aItrtr.first]] << " " ;
+		}
+		std::cout << "\n";
 
 		// Iterating through edges leaving this vertex
-		mOEIter oEItrtr;
-		oEItrtr = mg1.outEdges(*(vItrtr.first)); // Weird error here:	 error: no match for ‘operator=’
-	}
+		std::cout << "Through: \n";
+		for (oEItrtr = mg1.outEdges(*vItrtr.first); oEItrtr.first != oEItrtr.second; oEItrtr.first++){
+			std::cout
+				<< "("
+				<< alphabet[
+					mg1vIndices[
+						mg1.source(*oEItrtr.first)
+					]
+				]
+				<< ","
+				<< alphabet[
+					mg1vIndices[
+						mg1.target(*oEItrtr.first)
+					]
+				]
+				<< ") : "
+				<< mg1.getEdgeWeight(*oEItrtr.first)
+				<< "\n"
+			;
+		}
 
 	std::cout << "\n";
-	return 0;
+	}
 
 	// Attempt at looping through edges
-	// Helping variables:
-	std::pair<mEIter, mEIter> eItrtr = mg1.getEdgeIterator();
-}
+/*	std::pair<mEIter, mEIter> eItrtr; // where the data structure used for iterating through the edge data is stored
+	for (eItrtr = mg1.getEdgeIterator(); eItrtr.first != eItrtr.second; eItrtr.first++){
+		std::cout
+			<< "("
+			<< alphabet[
+				mg1vIndices[
+					mg1.source(*eItrtr.first)
+				]
+			]
+			<< ","
+			<< alphabet[
+				mg1vIndices[
+					mg1.target(*eItrtr.first)
+				]
+			]
+			<< ")"
+			<< "\n"
+		;
+	}
 */
+
+	return 0;
+}
+

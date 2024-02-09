@@ -30,6 +30,11 @@ class matrixGraph {
 		std::pair<mVIter,mVIter> getVertexIterator();
 		std::pair<mEIter,mEIter> getEdgeIterator();
 		std::pair<mOEIter,mOEIter> outEdges(mVertex v);
+		std::pair<mAIter,mAIter> adjacentVertices(mVertex v);
+		mVertexIndexMap getVertexIndexMap();
+		mVertex source(mEdge e);
+		mVertex target(mEdge e);
+		double getEdgeWeight(mEdge e);
 };
 
 #endif
