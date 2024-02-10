@@ -53,7 +53,7 @@ mVertex matrixGraph::target(mEdge e){
 double matrixGraph::getEdgeWeight(mEdge e){
 	return boost::get(boost::edge_weight, thisGraph, e);
 };
-
+/*
 int main() {
 	// Relevant tests here
 
@@ -168,7 +168,7 @@ int main() {
 		;
 	}
 */
-
+/*
 	return 0;
 }
-
+*/
