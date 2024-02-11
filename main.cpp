@@ -1,13 +1,12 @@
 #include "meta.h"
 #include "classes/datastructures/adj_list_graph.h"
 #include "classes/datastructures/adj_matrix_graph.h"
+#include "templates/algorithms/dijkstra.tpp"
 
 int main() {
-	// Crating a graph
+	// List Graph construction
 	listGraph lg1 = listGraph(16);
-	matrixGraph mg1 = matrixGraph(16);
 
-	// Adding vertices
 	vertex A = lg1.addVertex(0);
 	vertex B = lg1.addVertex(1);
 	vertex C = lg1.addVertex(2);
@@ -25,24 +24,6 @@ int main() {
 	vertex O = lg1.addVertex(14);
 	vertex P = lg1.addVertex(15);
 
-	mVertex mA = mg1.addVertex(0);
-	mVertex mB = mg1.addVertex(1);
-	mVertex mC = mg1.addVertex(2);
-	mVertex mD = mg1.addVertex(3);
-	mVertex mE = mg1.addVertex(4);
-	mVertex mF = mg1.addVertex(5);
-	mVertex mG = mg1.addVertex(6);
-	mVertex mH = mg1.addVertex(7);
-	mVertex mI = mg1.addVertex(8);
-	mVertex mJ = mg1.addVertex(9);
-	mVertex mK = mg1.addVertex(10);
-	mVertex mL = mg1.addVertex(11);
-	mVertex mM = mg1.addVertex(12);
-	mVertex mN = mg1.addVertex(13);
-	mVertex mO = mg1.addVertex(14);
-	mVertex mP = mg1.addVertex(15);
-
-	// Adding edges
 	std::pair<edge, bool> AB = lg1.addEdge(A,B,1);
 	std::pair<edge, bool> AC = lg1.addEdge(A,C,1);
 	std::pair<edge, bool> BD = lg1.addEdge(B,D,2);
@@ -67,6 +48,26 @@ int main() {
 	std::pair<edge, bool> MO = lg1.addEdge(M,O,1);
 	std::pair<edge, bool> MP = lg1.addEdge(M,P,1);
 	std::pair<edge, bool> NP = lg1.addEdge(N,P,1);
+
+	// Matrix Graph Construction
+	matrixGraph mg1 = matrixGraph(16);
+
+	mVertex mA = mg1.addVertex(0);
+	mVertex mB = mg1.addVertex(1);
+	mVertex mC = mg1.addVertex(2);
+	mVertex mD = mg1.addVertex(3);
+	mVertex mE = mg1.addVertex(4);
+	mVertex mF = mg1.addVertex(5);
+	mVertex mG = mg1.addVertex(6);
+	mVertex mH = mg1.addVertex(7);
+	mVertex mI = mg1.addVertex(8);
+	mVertex mJ = mg1.addVertex(9);
+	mVertex mK = mg1.addVertex(10);
+	mVertex mL = mg1.addVertex(11);
+	mVertex mM = mg1.addVertex(12);
+	mVertex mN = mg1.addVertex(13);
+	mVertex mO = mg1.addVertex(14);
+	mVertex mP = mg1.addVertex(15);
 
 	std::pair<mEdge, bool> AB_M = mg1.addEdge(mA,mB,1);
 	std::pair<mEdge, bool> AC_M = mg1.addEdge(mA,mC,1);
@@ -93,68 +94,12 @@ int main() {
 	std::pair<mEdge, bool> MP_M = mg1.addEdge(mM,mP,1);
 	std::pair<mEdge, bool> NP_M = mg1.addEdge(mN,mP,1);
 
-	vertexIndexMap lg1vIndices = lg1.getVertexIndexMap(); // For easier loopthrough
-
-	// Iterating through vertices
-	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	std::pair<vIter, vIter> vItrtr; // where the data structure used for iterating through the vertex data is stored
-	std::pair<aIter, aIter> aItrtr; // where the data structure used for iterating through the adjacency data is stored
-	std::pair<oEIter, oEIter> oEItrtr; // where the data structure used for iterating through each edge leaving the vertex
-	for (vItrtr = lg1.getVertexIterator(); vItrtr.first != vItrtr.second; vItrtr.first++){
-		std::cout << alphabet[lg1vIndices[*vItrtr.first]] << " Connected to: \n" ;
-		//std::cout << alphabet[i] << " " ; // This can also be used to iterate through vertices (no map)
-
-		// Iterating through vertices adjacent to this one
-		for (aItrtr = lg1.adjacentVertices(*vItrtr.first); aItrtr.first != aItrtr.second; aItrtr.first++){
-			std::cout << alphabet[lg1vIndices[*aItrtr.first]] << " " ;
-		}
-		std::cout << "Through: \n" ;
-
-		// Iterating through edges leaving this vertex
-		for (oEItrtr = lg1.outEdges(*vItrtr.first); oEItrtr.first != oEItrtr.second; oEItrtr.first++){
-			std::cout
-			<< "("
-			<< alphabet[
-				lg1vIndices[
-					lg1.source(*oEItrtr.first)
-				]
-			   ]
-			<< ","
-			<< alphabet[
-				lg1vIndices[
-					lg1.target(*oEItrtr.first)
-				]
-			   ]
-			<< ") : "
-			<< lg1.getEdgeWeight(*oEItrtr.first)
-			<< "\n"
-			;
-		}
-	}
-	std::cout << "\n";
-
-	// Iterating through all edges of graph
-/*	std::pair<eIter, eIter> eItrtr; // where the data structure used for iterating through the edge data is stored
-	for (eItrtr = lg1.getEdgeIterator(); eItrtr.first != eItrtr.second; eItrtr.first++){
-		std::cout
-			<< "("
-			<< alphabet[
-				lg1vIndices[
-					lg1.source(*eItrtr.first)
-				]
-			   ]
-			<< ","
-			<< alphabet[
-				lg1vIndices[
-					lg1.target(*eItrtr.first)
-				]
-			   ]
-			<< ") : "
-			<< lg1.getEdgeWeight(*eItrtr.first)
-			<< "\n"
-		;
-	}
-*/
+	std::cout
+		<< dijkstra<listGraph, vertex, int>(lg1, G, P)
+		<< " "
+		<< dijkstra<matrixGraph, mVertex, int>(mg1, mG, mP)
+		<< "\n"
+	;
 
 	return 0;
 }
