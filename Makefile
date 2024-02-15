@@ -8,9 +8,12 @@ MAINDEP = main.cpp classes/datastructures/adj_list_graph.cpp classes/datastructu
 all: $(MAINDEP)
 	$(CC) $(MAINDEP) -o $(EX)
 
-# tests
+# for testing during development
 matrixtest: classes/datastructures/adj_matrix_graph.cpp
 	$(CC) classes/datastructures/adj_matrix_graph.cpp -o $(EX)
+
+listtest: classes/datastructures/adj_list_graph.cpp
+	$(CC) classes/datastructures/adj_list_graph.cpp -o $(EX)
 
 # cleanup
 clean:
