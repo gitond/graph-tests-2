@@ -63,9 +63,9 @@ int main() {
 	std::pair<mEdge, bool> NP_M = mg1.addEdge(N,P,1);
 
 	std::cout
-		<< dijkstra<listGraph, vertex, int>(lg1, G, P)
+		<< dijkstra<listGraph, vertex, oEIter, int>(lg1, G, P)
 		<< " "
-		<< dijkstra<matrixGraph, mVertex, int>(mg1, G, P)
+		<< dijkstra<matrixGraph, mVertex, mOEIter, int>(mg1, G, P)
 		<< "\n"
 	;
 
