@@ -11,11 +11,13 @@ matrixGraph::matrixGraph(int VertexAmount):
 	};
 
 // Functions
+/*	TEMPORARILY DISABLED DUE TO #14
 mVertex matrixGraph::addVertex(int vertexNo){
 	mVertex thisVert;
 	thisVert = vertexNo;
 	return thisVert;
 };
+*/
 
 // Wrappers for boost functions
 std::pair<mEdge, bool> matrixGraph::addEdge(mVertex V1, mVertex V2, double weight){
