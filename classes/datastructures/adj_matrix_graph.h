@@ -25,6 +25,7 @@ class matrixGraph {
 		matrixGraph(int VertexAmount);
 		// Functions
 //		mVertex addVertex(int vertexNo);	// TEMPORARILY DISABLED DUE TO #14
+		double maxPrice(std::pair<mEIter, mEIter> i);
 		// Wrappers for boost functions
 		std::pair<mEdge, bool> addEdge(mVertex V1, mVertex V2, double weight);
 		std::pair<mVIter,mVIter> getVertexIterator();

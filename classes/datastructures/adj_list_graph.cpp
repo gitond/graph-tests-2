@@ -63,6 +63,17 @@ int listGraph::numVertices(){
 	return boost::num_vertices(thisGraph);
 };
 
+// Own functions
+double listGraph::maxPrice(std::pair<eIter, eIter> i){ // We expect the appropriate edge iterator as an input
+	double maxPr = std::numeric_limits<double>::lowest();
+	for (;i.first != i.second; i.first++){
+		if (boost::get(boost::edge_weight, thisGraph, *i.first) > maxPr){
+			maxPr = boost::get(boost::edge_weight, thisGraph, *i.first);
+		}
+	}
+	return maxPr;
+};
+
 // Only for testing within this file
 /*
 int main() {
@@ -96,9 +107,9 @@ int main() {
 	std::pair<edge, bool> MP = lg1.addEdge(M,P,1);
 	std::pair<edge, bool> NP = lg1.addEdge(N,P,1);
 
-	int nVerts = lg1.numVertices();
+	double maxPr = lg1.maxPrice(lg1.getEdgeIterator());
 
-	std::cout << nVerts << "\n";
+	std::cout << maxPr << "\n";
 
 	return 0;
 }

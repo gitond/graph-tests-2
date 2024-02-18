@@ -18,6 +18,15 @@ mVertex matrixGraph::addVertex(int vertexNo){
 	return thisVert;
 };
 */
+double matrixGraph::maxPrice(std::pair<mEIter, mEIter> i){
+	double maxPr = std::numeric_limits<double>::lowest();
+	for (;i.first != i.second; i.first++){
+		if (boost::get(boost::edge_weight, thisGraph, *i.first) > maxPr){
+			maxPr = boost::get(boost::edge_weight, thisGraph, *i.first);
+		}
+	}
+	return maxPr;
+};
 
 // Wrappers for boost functions
 std::pair<mEdge, bool> matrixGraph::addEdge(mVertex V1, mVertex V2, double weight){

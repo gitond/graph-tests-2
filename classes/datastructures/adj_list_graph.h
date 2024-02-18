@@ -36,6 +36,9 @@ class listGraph {
 		vertex target(edge e);
 		double getEdgeWeight(edge e);
 		int numVertices();
+
+		// Own functions
+		double maxPrice(std::pair<eIter, eIter> i);
 };
 
 #endif
