@@ -55,6 +55,12 @@ mVertex matrixGraph::target(mEdge e){
 double matrixGraph::getEdgeWeight(mEdge e){
 	return boost::get(boost::edge_weight, thisGraph, e);
 };
+
+int matrixGraph::numVertices(){
+	// IMPORTANT! boost::num_vertices() returns vertices_size_type which we force to be int here. May cause problems in the future, potential source of debugging
+	return boost::num_vertices(thisGraph);
+};
+
 /*
 int main() {
   // Relevant tests here

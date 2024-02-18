@@ -58,61 +58,16 @@ std::pair<aIter, aIter> listGraph::adjacentVertices(vertex v){
 	return boost::adjacent_vertices(v, thisGraph);
 };
 
-// Only for testing within this file
+int listGraph::numVertices(){
+	// IMPORTANT! boost::num_vertices() returns vertices_size_type which we force to be int here. May cause problems in the future, potential source of debugging
+	return boost::num_vertices(thisGraph);
+};
 
+// Only for testing within this file
 /*
 int main() {
 	// Relevant tests here
-
-//	listGraphInternal thisGraph(16);
-
-/*	vertex A = boost::add_vertex(thisGraph);
-	vertex B = boost::add_vertex(thisGraph);
-	vertex C = boost::add_vertex(thisGraph);
-	vertex D = boost::add_vertex(thisGraph);
-	vertex E = boost::add_vertex(thisGraph);
-	vertex F = boost::add_vertex(thisGraph);
-	vertex G = boost::add_vertex(thisGraph);
-	vertex H = boost::add_vertex(thisGraph);
-	vertex I = boost::add_vertex(thisGraph);
-	vertex J = boost::add_vertex(thisGraph);
-	vertex K = boost::add_vertex(thisGraph);
-	vertex L = boost::add_vertex(thisGraph);
-	vertex M = boost::add_vertex(thisGraph);
-	vertex N = boost::add_vertex(thisGraph);
-	vertex O = boost::add_vertex(thisGraph);
-	vertex P = boost::add_vertex(thisGraph);
-*//*
-
 	enum verts { A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P };
-
-/*	std::pair<edge, bool> AB = boost::add_edge(A,B,1,thisGraph);
-	std::pair<edge, bool> AC = boost::add_edge(A,C,1,thisGraph);
-	std::pair<edge, bool> BD = boost::add_edge(B,D,2,thisGraph);
-	std::pair<edge, bool> BE = boost::add_edge(B,E,1,thisGraph);
-	std::pair<edge, bool> CD = boost::add_edge(C,D,2,thisGraph);
-	std::pair<edge, bool> CF = boost::add_edge(C,F,1,thisGraph);
-	std::pair<edge, bool> DH = boost::add_edge(D,H,3,thisGraph);
-	std::pair<edge, bool> EG = boost::add_edge(E,G,1,thisGraph);
-	std::pair<edge, bool> EH = boost::add_edge(E,H,2,thisGraph);
-	std::pair<edge, bool> FH = boost::add_edge(F,H,2,thisGraph);
-	std::pair<edge, bool> FI = boost::add_edge(F,I,1,thisGraph);
-	std::pair<edge, bool> GJ = boost::add_edge(G,J,1,thisGraph);
-	std::pair<edge, bool> GL = boost::add_edge(G,L,1,thisGraph);
-	std::pair<edge, bool> HJ = boost::add_edge(H,J,3,thisGraph);
-	std::pair<edge, bool> HM = boost::add_edge(H,M,2,thisGraph);
-	std::pair<edge, bool> HK = boost::add_edge(H,K,3,thisGraph);
-	std::pair<edge, bool> IK = boost::add_edge(I,K,2,thisGraph);
-	std::pair<edge, bool> IN = boost::add_edge(I,N,1,thisGraph);
-	std::pair<edge, bool> JO = boost::add_edge(J,O,1,thisGraph);
-	std::pair<edge, bool> KP = boost::add_edge(K,P,2,thisGraph);
-	std::pair<edge, bool> LO = boost::add_edge(L,O,1,thisGraph);
-	std::pair<edge, bool> MO = boost::add_edge(M,O,1,thisGraph);
-	std::pair<edge, bool> MP = boost::add_edge(M,P,1,thisGraph);
-	std::pair<edge, bool> NP = boost::add_edge(N,P,1,thisGraph);
-
-	std::cout << boost::num_vertices(thisGraph) << "\n";
-*//*
 
 	listGraph lg1 = listGraph(16);
 
@@ -140,6 +95,10 @@ int main() {
 	std::pair<edge, bool> MO = lg1.addEdge(M,O,1);
 	std::pair<edge, bool> MP = lg1.addEdge(M,P,1);
 	std::pair<edge, bool> NP = lg1.addEdge(N,P,1);
+
+	int nVerts = lg1.numVertices();
+
+	std::cout << nVerts << "\n";
 
 	return 0;
 }

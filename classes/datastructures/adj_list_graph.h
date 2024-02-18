@@ -35,6 +35,7 @@ class listGraph {
 		vertex source(edge e);
 		vertex target(edge e);
 		double getEdgeWeight(edge e);
+		int numVertices();
 };
 
 #endif

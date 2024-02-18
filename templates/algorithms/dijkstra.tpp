@@ -18,5 +18,5 @@ template <typename graph, typename gVertex, typename path> path dijkstra(graph g
 	std::vector<dict> priceLog;
 	priceLog.push_back({ source, 0 });
 
-	return 0;
+	return g.numVertices();
 }

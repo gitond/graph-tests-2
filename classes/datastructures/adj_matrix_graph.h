@@ -35,6 +35,7 @@ class matrixGraph {
 		mVertex source(mEdge e);
 		mVertex target(mEdge e);
 		double getEdgeWeight(mEdge e);
+		int numVertices();
 };
 
 #endif
