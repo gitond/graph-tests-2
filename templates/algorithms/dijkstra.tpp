@@ -35,11 +35,29 @@ template <typename graph, typename gVertex, typename neighborI, typename path> p
 		minPrice.price = g.maxPrice(g.getEdgeIterator()) + 1;
 		for(parentChildStruct v : visited){
 			for(n = g.outEdges(v.current); n.first != n.second; n.first++){
-
 			}
 		}
-
 	}
+	// TEST AREA
+	// Terrible way of searching for a struct in a vector
+	parentChildStruct b1 = { 3,2 };
+	parentChildStruct searchable = { 7,2 };
+	parentChildStruct v1 = { 5,1 };
+
+	std::vector<parentChildStruct> of = {b1, {4,2} ,v1, {6,1} };
+
+	bool searchableInStruct = false;
+	for(parentChildStruct m : of){
+		if((m.current == searchable.current) && (m.parent == searchable.parent)){
+			searchableInStruct = true;
+		}		
+	}
+
+	if (!(searchableInStruct)){
+		std::cout << "Where they at? ";
+	}
+ 
+	// TEST AREA CLOSE
 
 	return 0;
 }
