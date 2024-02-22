@@ -1,6 +1,6 @@
 #include "../../meta.h"
 
-template <typename graph, typename gVertex, typename neighborI, typename path> path dijkstra(graph g, gVertex s, gVertex d){
+template <typename graph, typename gVertex, typename neighborI, typename gEdge, typename path> path dijkstra(graph g, gVertex s, gVertex d){
 	// Variable setups
 	std::vector<bool> unvisited(g.numVertices(), true);		// a vector with a true value for each vertex (all of them are unvisited at this point)
 	std::vector<double> distances(g.numVertices(), std::numeric_limits<double>::max());
@@ -9,16 +9,24 @@ template <typename graph, typename gVertex, typename neighborI, typename path> p
 	parents[s] = -1;						// we use -1 to mark the source vertex in the parent data
 	std::vector<gVertex> pathV;
 
+	std::vector<gEdge> examined;
+	gEdge nEdge;
+
 	std::pair<neighborI,neighborI> n;				// A pair of out edge iterators used to check for next possible nodes in pathfinding
 	double nWeight;
 	double minDist;
 	gVertex minDistInd;
+
+	gVertex previous;
 
 	gVertex current = s;
 	int i = 0;
 
 	// Dijkstra's algorithm
 	while(i <= g.numVertices()) {
+
+		examined.push_back(nEdge);		
+
 		// Iterating through all neighbors of current
 		for(n = g.outEdges(current); n.first != n.second; n.first++){
 			/*
@@ -31,6 +39,9 @@ template <typename graph, typename gVertex, typename neighborI, typename path> p
 				nWeight = distances[current] + g.getEdgeWeight(*n.first);
 				if(distances[g.target(*n.first)] > nWeight){
 					distances[g.target(*n.first)] = nWeight;
+
+					examined[examined.size()-1] = *n.first; // Saving edge to vector of examined
+
 				}
 			}
 		}
@@ -51,14 +62,25 @@ template <typename graph, typename gVertex, typename neighborI, typename path> p
 
 		parents[minDistInd] = current;
 		current = minDistInd;
-
-		std::cout << minDistInd << "\n";
-
 		if(current == d){
 			break;
 		}
 		i++;
 	}
+
+	for(gEdge e : examined){
+		std::cout << e << "\n";
+	}
+
+	// Returning path
+/*	FLAWED SOLUTION!! COME UP WITH NEW ONE (MAYBE CONSIDER SAVING VISITED EDGES)
+	previous = parents[current];
+	while(previous != -1){
+		std::cout << previous << " ";
+		current = previous;
+		previous = parents[current];
+	}
+*/
 
 	return 0;
 }
