@@ -1,7 +1,7 @@
 #include "meta.h"
 #include "classes/datastructures/adj_list_graph.h"
 #include "classes/datastructures/adj_matrix_graph.h"
-#include "templates/algorithms/dijkstra.tpp"
+#include "algorithms/templates/dijkstra.tpp"
 
 int main() {
 	enum verts { A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P };
