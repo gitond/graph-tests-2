@@ -22,7 +22,10 @@ while(i <= G.size): (
 	∀ N ∈ current.neighbors:
 		(unvisited[N.index] = true) → (
 			nWeight ← distances[current.index] + weight(current,N)
-			(distances[N.index] > nWeight) → (distances[N.index] ← nWeight)
+			(distances[N.index] > nWeight) → (
+				distances[N.index] ← nWeight
+				parents[N.index] ← current
+			)
 		)
 	unvisited[current.index] ← false						// marking current as visited
 	minDist ← ∞
@@ -34,7 +37,6 @@ while(i <= G.size): (
 				minDistInd ← U.index
 			)
 		)
-	parents[minDistInd] ← current
 	current ← minDistInd
 	(current = D) → (break;)
 	i++
@@ -46,4 +48,5 @@ while(previous ≠ -1): (
 	current ← previous
 	previous ← parents[current]
 )
+path.beginning ← S
 return path

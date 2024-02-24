@@ -62,12 +62,27 @@ int main() {
 	std::pair<mEdge, bool> MP_M = mg1.addEdge(M,P,1);
 	std::pair<mEdge, bool> NP_M = mg1.addEdge(N,P,1);
 
-	std::cout
-		<< dijkstra<listGraph, vertex, oEIter, edge, int>(lg1, G, P)
+	// Running algorithms and printing results
+	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	std::cout << "Running Dijkstra from G to P in list-type reference graph: ";
+	for(vertex v : dijkstra<listGraph, vertex, oEIter, std::vector<vertex>>(lg1, G, P)){
+		std::cout << alphabet[v] << " ";
+	}
+	std::cout << "\n";
+	std::cout << "Running Dijkstra from G to P in matrix-type reference graph: ";
+	for(vertex v : dijkstra<matrixGraph, mVertex, mOEIter, std::vector<vertex>>(mg1, G, P)){
+		std::cout << alphabet[v] << " ";
+	}
+	std::cout << "\n";
+
+/*	std::cout
+		<< dijkstra<listGraph, vertex, oEIter, std::vector<vertex>>(lg1, G, P)
 		<< " "
-		<< dijkstra<matrixGraph, mVertex, mOEIter, mEdge, int>(mg1, G, P)
+		<< dijkstra<matrixGraph, mVertex, mOEIter, , std::vector<vertex>>(mg1, G, P)
 		<< "\n"
 	;
+*/
 
 	return 0;
 }

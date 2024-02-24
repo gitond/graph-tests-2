@@ -1,6 +1,6 @@
 #include "../../meta.h"
 
-template <typename graph, typename gVertex, typename neighborI, typename gEdge, typename path> path dijkstra(graph g, gVertex s, gVertex d){
+template <typename graph, typename gVertex, typename neighborI, typename path> path dijkstra(graph g, gVertex s, gVertex d){
 	// Variable setups
 	std::vector<bool> unvisited(g.numVertices(), true);		// a vector with a true value for each vertex (all of them are unvisited at this point)
 	std::vector<double> distances(g.numVertices(), std::numeric_limits<double>::max());
@@ -8,9 +8,6 @@ template <typename graph, typename gVertex, typename neighborI, typename gEdge, 
 	std::vector<gVertex> parents(g.numVertices(), -2);		// we use the default value -2 for all parents that are not calculated yet
 	parents[s] = -1;						// we use -1 to mark the source vertex in the parent data
 	std::vector<gVertex> pathV;
-
-	std::vector<gEdge> examined;
-	gEdge nEdge;
 
 	std::pair<neighborI,neighborI> n;				// A pair of out edge iterators used to check for next possible nodes in pathfinding
 	double nWeight;
@@ -24,9 +21,6 @@ template <typename graph, typename gVertex, typename neighborI, typename gEdge, 
 
 	// Dijkstra's algorithm
 	while(i <= g.numVertices()) {
-
-		examined.push_back(nEdge);		
-
 		// Iterating through all neighbors of current
 		for(n = g.outEdges(current); n.first != n.second; n.first++){
 			/*
@@ -39,9 +33,7 @@ template <typename graph, typename gVertex, typename neighborI, typename gEdge, 
 				nWeight = distances[current] + g.getEdgeWeight(*n.first);
 				if(distances[g.target(*n.first)] > nWeight){
 					distances[g.target(*n.first)] = nWeight;
-
-					examined[examined.size()-1] = *n.first; // Saving edge to vector of examined
-
+					parents[g.target(*n.first)] = current;
 				}
 			}
 		}
@@ -50,7 +42,6 @@ template <typename graph, typename gVertex, typename neighborI, typename gEdge, 
 		unvisited[current] = false;
 		minDist = std::numeric_limits<double>::max();
 		minDistInd = -1;
-
 		for(int u = 0; u < g.numVertices(); u++){
 			if(unvisited[u]){
 				if(distances[u] < minDist){
@@ -59,8 +50,6 @@ template <typename graph, typename gVertex, typename neighborI, typename gEdge, 
 				}
 			}
 		}
-
-		parents[minDistInd] = current;
 		current = minDistInd;
 		if(current == d){
 			break;
@@ -68,19 +57,14 @@ template <typename graph, typename gVertex, typename neighborI, typename gEdge, 
 		i++;
 	}
 
-	for(gEdge e : examined){
-		std::cout << e << "\n";
-	}
-
 	// Returning path
-/*	FLAWED SOLUTION!! COME UP WITH NEW ONE (MAYBE CONSIDER SAVING VISITED EDGES)
 	previous = parents[current];
 	while(previous != -1){
-		std::cout << previous << " ";
+		pathV.insert(pathV.begin(), current);
 		current = previous;
 		previous = parents[current];
 	}
-*/
+	pathV.insert(pathV.begin(), s);
 
-	return 0;
+	return pathV;
 }
