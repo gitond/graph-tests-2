@@ -2,6 +2,7 @@
 #include "classes/datastructures/adj_list_graph.h"
 #include "classes/datastructures/adj_matrix_graph.h"
 #include "algorithms/templates/dijkstra.tpp"
+#include "algorithms/templates/bfs.tpp"
 
 int main() {
 	enum verts { A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P };
@@ -65,6 +66,15 @@ int main() {
 	// Running algorithms and printing results
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+	// BFS (Under development)
+	std::cout
+		<< bfs<listGraph, vertex, aIter, int>(lg1, G, P)
+		<< " "
+		<< bfs<matrixGraph, mVertex, mAIter, int>(mg1, G, P)
+		<< "\n"
+	;
+
+	// Dijkstra
 	std::cout << "Running Dijkstra from G to P in list-type reference graph: ";
 	for(vertex v : dijkstra<listGraph, vertex, oEIter, std::vector<vertex>>(lg1, G, P)){
 		std::cout << alphabet[v] << " ";

@@ -1,0 +1,27 @@
+procedure BFSEsimerkki(graaf idata, lahtosolmu, maalisolmu)
+	vieraillut ← tyhjaLista
+	kasiteltavat ← tyhjaLista
+	vanhemmat ← tyhjaLista
+	polku ← tyhjaLista
+	kasiteltavat.lisaaLoppuun(lahtosolmu)
+	vanhemmat[lahtosolmu] ← -1
+	while kasiteltavat ≠ tyhjaLista do
+		kasiteltava ← kasiteltavat.poistaEnsimmainen()
+		vieraillut.lisaaLoppuun(kasiteltava)
+		if kasiteltava = maalisolmu then
+			while vanhemmat[kasiteltava] ≠ -1 do
+				polku.lisaaAlkuun(kasiteltava)
+				kasiteltava ← vanhemmat[kasiteltava]
+			end while
+			polku.lisaaAlkuun(lahtosolmu)
+			return polku
+		else
+			for all n ∈ graafidata.naapurit(kasiteltava) do
+				if (n ∉ vieraillut && n ∉ kasiteltavat)
+					vanhemmat[n] ← kasiteltava
+					kasiteltavat.lisaaLoppuun(n)
+				end if
+			end for
+		end if
+	end while
+end procedure		
