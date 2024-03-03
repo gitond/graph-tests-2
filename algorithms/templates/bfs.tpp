@@ -33,43 +33,10 @@ template <typename graph, typename gVertex, typename neighborI, typename path>pa
 				)	{
 						parents[*n.first] = current;
 						vQueue.push_back(*n.first);
-
-//						std::cout << *n.first << " ";
-
 				} 
-//				else	{
-//						std::cout << *n.first << " ain't passing! \n" ;
-//				}
-
 			}
 		}
 	}
 
-	// TEST AREA //
-	/*
-	std::vector<int> fibonacci{ 1, 1, 2, 3, 5, 8, 13, 21 };
-	std::deque<int> evenN;
-	for(int i = 1; i <= 4; i++){
-		evenN.push_back(2*i);
-	}
-
-	// True if i not even & not fibonacci number
-	for(int i = 0; i < 10; i++){
-		if( 
-			(std::find(evenN.begin(), evenN.end(), i) == evenN.end()) &&
-			(std::find(fibonacci.begin(), fibonacci.end(), i) == fibonacci.end()) 
-		)	{
-				std::cout <<  i << " passed! \n" ;
-		} else	{
-				std::cout << i << " ain't passing! \n" ;
-		}
-	}
-	*/
-/*
-	for(gVertex v : pathV){
-		std::cout << v << " ";
-	}
-	std::cout << "\n";
-*/
 	return pathV;
 }
