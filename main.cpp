@@ -67,12 +67,23 @@ int main() {
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	// BFS (Under development)
-	std::cout
+	std::cout << "Running BFS from G to P in list-type reference graph: ";
+	for(vertex v : bfs<listGraph, vertex, aIter, std::vector<vertex>>(lg1, G, P)){
+		std::cout << alphabet[v] << " ";
+	}
+	std::cout << "\n";
+	std::cout << "Running BFS from G to P in matrix-type reference graph: ";
+	for(mVertex v : bfs<matrixGraph, mVertex, mAIter, std::vector<mVertex>>(mg1, G, P)){
+		std::cout << alphabet[v] << " ";
+	}
+	std::cout << "\n";
+/*	std::cout
 		<< bfs<listGraph, vertex, aIter, int>(lg1, G, P)
 		<< " "
 		<< bfs<matrixGraph, mVertex, mAIter, int>(mg1, G, P)
 		<< "\n"
 	;
+*/
 
 	// Dijkstra
 	std::cout << "Running Dijkstra from G to P in list-type reference graph: ";
@@ -81,7 +92,7 @@ int main() {
 	}
 	std::cout << "\n";
 	std::cout << "Running Dijkstra from G to P in matrix-type reference graph: ";
-	for(vertex v : dijkstra<matrixGraph, mVertex, mOEIter, std::vector<vertex>>(mg1, G, P)){
+	for(mVertex v : dijkstra<matrixGraph, mVertex, mOEIter, std::vector<mVertex>>(mg1, G, P)){
 		std::cout << alphabet[v] << " ";
 	}
 	std::cout << "\n";

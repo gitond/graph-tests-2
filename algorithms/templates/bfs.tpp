@@ -18,57 +18,58 @@ template <typename graph, typename gVertex, typename neighborI, typename path>pa
 
 		visited.push_back(current);
 		if(current == dest){
-			// Placeholder!!!
-			std::cout << " Lopussa ollaan! \n";
-			break;
-
-			// Body here later
+			while(parents[current] != -1){
+				pathV.insert(pathV.begin(), current);
+				current = parents[current];
+			}
+			pathV.insert(pathV.begin(), current);
 		} else {
 			for(n = g.adjacentVertices(current); n.first != n.second; n.first++){
-				std::cout << *n.first << " ";
-//				vQueue.push(*n.first);
-//				if( 
-//					std::find(visited.begin(), .end(), item) != vec.end() 
-//				)
+
+				// if a vertex adjacent to the current has not already been visited and is not in the queue of vertices to be visited next, add it to the queue
+				if( 
+					(std::find(vQueue.begin(), vQueue.end(), *n.first) == vQueue.end()) &&
+					(std::find(visited.begin(), visited.end(), *n.first) == visited.end()) 
+				)	{
+						parents[*n.first] = current;
+						vQueue.push_back(*n.first);
+
+//						std::cout << *n.first << " ";
+
+				} 
+//				else	{
+//						std::cout << *n.first << " ain't passing! \n" ;
+//				}
+
 			}
 		}
 	}
 
-	std::cout << "\n";
-
-
-
 	// TEST AREA //
-
+	/*
 	std::vector<int> fibonacci{ 1, 1, 2, 3, 5, 8, 13, 21 };
 	std::deque<int> evenN;
 	for(int i = 1; i <= 4; i++){
 		evenN.push_back(2*i);
 	}
 
-	// True if 8 not even
-	if( std::find(evenN.begin(), evenN.end(), 8) == evenN.end() ){
-		std::cout << " 8 is not an even number! \n" ;
-	} else {
-		std::cout << " 8 is an even number! \n" ;
+	// True if i not even & not fibonacci number
+	for(int i = 0; i < 10; i++){
+		if( 
+			(std::find(evenN.begin(), evenN.end(), i) == evenN.end()) &&
+			(std::find(fibonacci.begin(), fibonacci.end(), i) == fibonacci.end()) 
+		)	{
+				std::cout <<  i << " passed! \n" ;
+		} else	{
+				std::cout << i << " ain't passing! \n" ;
+		}
 	}
-
-	// True if 8 not fibonacci number
-	if( std::find(fibonacci.begin(), fibonacci.end(), 8) == fibonacci.end() ){
-		std::cout << " 8 is not a Fibonacci number! \n" ;
-	} else {
-		std::cout << " 8 is a Fibonacci number! \n" ;
+	*/
+/*
+	for(gVertex v : pathV){
+		std::cout << v << " ";
 	}
-
-	// True if 8 not even & not fibonacci number
-	if( 
-		(std::find(evenN.begin(), evenN.end(), 8) == evenN.end()) &&
-		(std::find(fibonacci.begin(), fibonacci.end(), 8) == fibonacci.end()) 
-	)	{
-			std::cout << " 8 passed! \n" ;
-	} else	{
-			std::cout << " 8 ain't passing! \n" ;
-	}
-
-	return 0;
+	std::cout << "\n";
+*/
+	return pathV;
 }
