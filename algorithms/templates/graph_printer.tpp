@@ -3,7 +3,7 @@
 template <typename graph, typename edgeI>void printG(graph g){
 	std::pair<edgeI, edgeI> eItrtr;
 
-	std::cout << "New graph with " << g.numVertices() << " vertices and connections: \n";
+	std::cout << "New graph with " << g.numVertices() << " vertices, and the following connections: \n";
 	for (eItrtr = g.getEdgeIterator(); eItrtr.first != eItrtr.second; eItrtr.first++){
 		std::cout
 			<< "("

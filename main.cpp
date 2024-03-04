@@ -4,6 +4,7 @@
 #include "algorithms/templates/dijkstra.tpp"
 #include "algorithms/templates/bfs.tpp"
 #include "algorithms/templates/graph_printer.tpp"
+#include "algorithms/templates/random_graph_generator.tpp"
 
 int main() {
 	enum verts { A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P };
@@ -63,11 +64,11 @@ int main() {
 	std::pair<mEdge, bool> MO_M = mg1.addEdge(M,O,1);
 	std::pair<mEdge, bool> MP_M = mg1.addEdge(M,P,1);
 	std::pair<mEdge, bool> NP_M = mg1.addEdge(N,P,1);
-
+/*
 	// Printing graphs
 	printG<listGraph, eIter>(lg1);
 	printG<matrixGraph, mEIter>(mg1);
-
+*/
 	// Running algorithms and printing results
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -94,6 +95,12 @@ int main() {
 		std::cout << alphabet[v] << " ";
 	}
 	std::cout << "\n";
+
+	// Experimenting with random graphs
+	listGraph lg2 = randomGraphGenerator<listGraph>(16);
+	matrixGraph mg2 = randomGraphGenerator<matrixGraph>(16);
+	printG<listGraph, eIter>(lg2);
+	printG<matrixGraph, mEIter>(mg2);
 
 	return 0;
 }
