@@ -3,6 +3,7 @@
 #include "classes/datastructures/adj_matrix_graph.h"
 #include "algorithms/templates/dijkstra.tpp"
 #include "algorithms/templates/bfs.tpp"
+#include "algorithms/templates/graph_printer.tpp"
 
 int main() {
 	enum verts { A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P };
@@ -62,6 +63,10 @@ int main() {
 	std::pair<mEdge, bool> MO_M = mg1.addEdge(M,O,1);
 	std::pair<mEdge, bool> MP_M = mg1.addEdge(M,P,1);
 	std::pair<mEdge, bool> NP_M = mg1.addEdge(N,P,1);
+
+	// Printing graphs
+	printG<listGraph, eIter>(lg1);
+	printG<matrixGraph, mEIter>(mg1);
 
 	// Running algorithms and printing results
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

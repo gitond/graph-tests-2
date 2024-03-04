@@ -1,4 +1,4 @@
-procedure BFSEsimerkki(graaf idata, lahtosolmu, maalisolmu)
+procedure BFSEsimerkki(graafidata, lahtosolmu, maalisolmu)
 	vieraillut ← tyhjaLista
 	kasiteltavat ← tyhjaLista
 	vanhemmat ← tyhjaLista
