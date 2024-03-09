@@ -96,9 +96,16 @@ int main() {
 	}
 	std::cout << "\n";
 
+	// Seeding rng
+	std::srand(std::time(NULL));
+
 	// Experimenting with random graphs
-	listGraph lg2 = randomGraphGenerator<listGraph>(16);
-	matrixGraph mg2 = randomGraphGenerator<matrixGraph>(16);
+	listGraph lg2 = randomGraphGenerator<listGraph
+		//, aIter
+	>(16);
+	matrixGraph mg2 = randomGraphGenerator<matrixGraph
+		//, mAIter
+	>(16);
 	printG<listGraph, eIter>(lg2);
 	printG<matrixGraph, mEIter>(mg2);
 

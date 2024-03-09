@@ -6,7 +6,7 @@ template <typename graph, typename gVertex, typename neighborI, typename path>pa
 	std::vector<gVertex> pathV;
 	gVertex current;
 
-	std::pair<neighborI,neighborI> n;		// A pair of out edge iterators used to check for next possible nodes in pathfinding
+	std::pair<neighborI,neighborI> n;		// A pair of adjacency iterators used to check for next possible nodes in pathfinding
 
 	std::deque<gVertex> vQueue;
 	vQueue.push_back(source);
