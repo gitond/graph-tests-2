@@ -11,7 +11,6 @@ template <typename graph>graph randomGraphGenerator(int vertAm){
 
 	std::vector<std::vector<int>> connections(vertAm); // Needed to check for duplicate edges (adjacency iterator doesn't work for unpopulated graphs and therefore segfaults)
 
-	//std::cout << "New graph with " << vertAm << " vertices \n";
 	for(int i=0; i < int(vertAm * 1.25) + std::rand() % vertAm; i++){
 		// Generating random vertices
 		v2 = std::rand() % vertAm;
@@ -31,13 +30,6 @@ template <typename graph>graph randomGraphGenerator(int vertAm){
 		}
 
 		// Reject connection that's already in graph
-/*		// Printing connections for deugging
-		std::cout << "Current connections at " << v1 << ": ";
-		for(int i : connections[v1]){
-			std::cout << i << " ";
-		}
-		std::cout << "\n";
-*/
 		if(
 			std::find(connections[v1].begin(), connections[v1].end(), v2) != connections[v1].end()
 		)	{
@@ -53,7 +45,6 @@ template <typename graph>graph randomGraphGenerator(int vertAm){
 		rw = (std::rand() % maximumWeight) +1; // Random wieght
 
 		// Adding connection to graph
-		//std::cout << "New edge: " << v1 << "-" << v2 << " with weight: " << rw << "\n"; 
 		g.addEdge(v1,v2,rw);		
 	}
 
