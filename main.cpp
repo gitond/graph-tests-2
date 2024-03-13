@@ -100,14 +100,34 @@ int main() {
 	std::srand(std::time(NULL));
 
 	// Experimenting with random graphs
-	listGraph lg2 = randomGraphGenerator<listGraph
-		//, aIter
-	>(16);
-	matrixGraph mg2 = randomGraphGenerator<matrixGraph
-		//, mAIter
-	>(16);
+	listGraph lg2 = randomGraphGenerator<listGraph>(26);
+	matrixGraph mg2 = randomGraphGenerator<matrixGraph>(26);
 	printG<listGraph, eIter>(lg2);
 	printG<matrixGraph, mEIter>(mg2);
+
+	// BFS in generated graph
+	std::cout << "Running BFS from A to Z in list-type generated graph: ";
+	for(vertex v : bfs<listGraph, vertex, aIter, std::vector<vertex>>(lg2, 0, 25)){
+		std::cout << alphabet[v] << " ";
+	}
+	std::cout << "\n";
+	std::cout << "Running BFS from A to Z in matrix-type generated graph: ";
+	for(mVertex v : bfs<matrixGraph, mVertex, mAIter, std::vector<mVertex>>(mg2, 0, 25)){
+		std::cout << alphabet[v] << " ";
+	}
+	std::cout << "\n";
+
+	// Dijkstra
+	std::cout << "Running Dijkstra from A to Z in list-type generated graph: ";
+	for(vertex v : dijkstra<listGraph, vertex, oEIter, std::vector<vertex>>(lg2, 0, 25)){
+		std::cout << alphabet[v] << " ";
+	}
+	std::cout << "\n";
+	std::cout << "Running Dijkstra from A to Z in matrix-type reference graph: ";
+	for(mVertex v : dijkstra<matrixGraph, mVertex, mOEIter, std::vector<mVertex>>(mg2, 0, 25)){
+		std::cout << alphabet[v] << " ";
+	}
+	std::cout << "\n";
 
 	return 0;
 }
