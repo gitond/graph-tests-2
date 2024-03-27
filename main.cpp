@@ -97,47 +97,45 @@ int main() {
 	}
 	std::cout << "\n";
 */
-	// Seeding rng
-	std::srand(std::time(NULL));
-
 	// Experimenting with random graphs
-	listGraph lg2 = listGraph(26);
-	matrixGraph mg2 = matrixGraph(26);
+	listGraph lg2 = listGraph(64);
+//	matrixGraph mg2 = matrixGraph(512);
 
-	// Taking timestamp
-	std::time_t startT = std::time(nullptr);
+	// Seeding rng
+	std::time_t startT = std::time(nullptr); 	// Taking timestamp
+	std::srand(startT);
 
 	// Testing algorithms in loop
-	for(int i = 0; i < 10000; i++){
-		lg2 = randomGraphGenerator<listGraph>(26);
-		mg2 = randomGraphGenerator<matrixGraph>(26);
+	for(int i = 0; i < 2000; i++){
+		lg2 = randomGraphGenerator<listGraph>(64);
+//		mg2 = randomGraphGenerator<matrixGraph>(512);
 		printG<listGraph, eIter>(lg2);
-		printG<matrixGraph, mEIter>(mg2);
+//		printG<matrixGraph, mEIter>(mg2);
 
 		// BFS in generated graph
-		std::cout << "Running BFS from A to Z in list-type generated graph: ";
-		for(vertex v : bfs<listGraph, vertex, aIter, std::vector<vertex>>(lg2, 0, 25)){
-			std::cout << alphabet[v] << " ";
+		std::cout << "Running BFS from first to last node in list-type generated graph: ";
+		for(vertex v : bfs<listGraph, vertex, aIter, std::vector<vertex>>(lg2, 0, 63)){
+			std::cout << v << " ";
 		}
 		std::cout << "\n";
-		std::cout << "Running BFS from A to Z in matrix-type generated graph: ";
-		for(mVertex v : bfs<matrixGraph, mVertex, mAIter, std::vector<mVertex>>(mg2, 0, 25)){
-			std::cout << alphabet[v] << " ";
+/*		std::cout << "Running BFS from first to last node in matrix-type generated graph: ";
+		for(mVertex v : bfs<matrixGraph, mVertex, mAIter, std::vector<mVertex>>(mg2, 0, 511)){
+			std::cout << v << " ";
 		}
 		std::cout << "\n";
 
 		// Dijkstra
-		std::cout << "Running Dijkstra from A to Z in list-type generated graph: ";
-		for(vertex v : dijkstra<listGraph, vertex, oEIter, std::vector<vertex>>(lg2, 0, 25)){
-			std::cout << alphabet[v] << " ";
+		std::cout << "Running Dijkstra from first to last node in list-type generated graph: ";
+		for(vertex v : dijkstra<listGraph, vertex, oEIter, std::vector<vertex>>(lg2, 0, 63)){
+			std::cout << v << " ";
 		}
 		std::cout << "\n";
-		std::cout << "Running Dijkstra from A to Z in matrix-type reference graph: ";
-		for(mVertex v : dijkstra<matrixGraph, mVertex, mOEIter, std::vector<mVertex>>(mg2, 0, 25)){
-			std::cout << alphabet[v] << " ";
+		std::cout << "Running Dijkstra from first to last node in matrix-type reference graph: ";
+		for(mVertex v : dijkstra<matrixGraph, mVertex, mOEIter, std::vector<mVertex>>(mg2, 0, 511)){
+			std::cout << v << " ";
 		}
 		std::cout << "\n";
-	}
+*/	}
 
 	// Test results
 	std::time_t finishT = std::time(nullptr);
