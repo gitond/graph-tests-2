@@ -7,6 +7,7 @@
 #include "algorithms/templates/random_graph_generator.tpp"
 
 int main() {
+/*
 	enum verts { A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P };
 
 	// List Graph construction
@@ -71,7 +72,7 @@ int main() {
 */
 	// Running algorithms and printing results
 	const char* alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
+/*
 	// BFS
 	std::cout << "Running BFS from G to P in list-type reference graph: ";
 	for(vertex v : bfs<listGraph, vertex, aIter, std::vector<vertex>>(lg1, G, P)){
@@ -95,13 +96,18 @@ int main() {
 		std::cout << alphabet[v] << " ";
 	}
 	std::cout << "\n";
-
+*/
 	// Seeding rng
 	std::srand(std::time(NULL));
 
 	// Experimenting with random graphs
-	listGraph lg2 = listGraph(16);
-	matrixGraph mg2 = matrixGraph(16);
+	listGraph lg2 = listGraph(26);
+	matrixGraph mg2 = matrixGraph(26);
+
+	// Taking timestamp
+	std::time_t startT = std::time(nullptr);
+
+	// Testing algorithms in loop
 	for(int i = 0; i < 10000; i++){
 		lg2 = randomGraphGenerator<listGraph>(26);
 		mg2 = randomGraphGenerator<matrixGraph>(26);
@@ -132,6 +138,12 @@ int main() {
 		}
 		std::cout << "\n";
 	}
+
+	// Test results
+	std::time_t finishT = std::time(nullptr);
+	std::cout << "Started tests at: " << startT << "\n";
+	std::cout << "Finished tests at: " << finishT << "\n";
+	std::cout << "Testing took: " << finishT - startT << " seconds \n";
 
 	return 0;
 }
