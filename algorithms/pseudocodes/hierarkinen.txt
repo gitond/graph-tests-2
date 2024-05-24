@@ -1,0 +1,19 @@
+procedure HierarkinenEsimerkki(graafidata,lahtosolmu,maalisolmu)
+	YlatasonGraafi ← Alueenjakoalgoritmi.Jaa(graafidata)
+	lahtoalue ← tyhjaGraafi
+	maalialue ← tyhjaGraafi
+	varsinainenPolku ← tyhjaLista
+	for all alue ∈ YlatasonGraafi do
+		if lahtosolmu ∈ alue then
+			lahtoalue ← alue
+		end if
+		if maalisolmu ∈ alue then
+			maalialue ← alue
+		end if
+	end for
+	YlatasonPolku ← polunetsintaAlgoritmi(YlatasonGraafi,lahtoalue,maalialue)
+	for all alue ∈ YlatasonPolku do
+		varsinainenPolku.lisaaLoppuun(polunetsintaAlgoritmi(alue,Alueenjakoalgortimi.KriittisetPisteet(alue)))
+	end for
+	return varsinainenPolku
+end procedure

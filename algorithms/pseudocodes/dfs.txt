@@ -1,0 +1,17 @@
+procedure DFSEsimerkki(graafidata,lahtosolmu,maalisolmu,gVieraillut)
+	vieraillut ← gVieraillut
+	vieraillut.lisaaLoppuun(lahtosolmu)
+	for all n ∈ graafidata.naapurit(lahtosolmu) do
+		if n ∉ vieraillut then
+			if n ≠ maalisolmu then
+				polku = DFSEsimerkki(graafidata, n, maalisolmu, vieraillut)
+			else
+				return [n]
+			end if
+		end if
+	end for
+	if polku ≠ NULL then
+		pollku.lisaaAlkuun(lahtosolmu)
+	end if
+	return polku
+end procedure

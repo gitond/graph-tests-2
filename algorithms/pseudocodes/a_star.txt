@@ -1,0 +1,43 @@
+procedure AStarEsimerkki(graafidata, lahtosolmu, maalisolmu)
+	avoinL ← tyhjaLista
+	suljettuL ← tyhjaLista
+	gHintaLog ← tyhjaSanakirja
+	avoinL.lisaaLoppuun(nykyinen = lahtosolmu; vanhempi = NULL)
+	gHintaLog.lisaa(AVAIN = lahtosolmu; ARVO = 0)
+	while avoinL ≠ tyhjaLista do
+		minHinta ← ∞
+		for all solmu ∈ avoinL do
+			if gHintaLog[solmu.nykyinen] + heuristinenArvo[solmu.nykyinen] < minHinta then
+				minHinta ← gHintaLog[solmu.nykyinen] + heuristinenArvo[solmu.nykyinen]
+				nykyinen ← solmu
+			end if
+		end for
+		avoinL.poista(avoinL.indeksi(nykyinen))
+		suljettuL.lisaaLoppuun(nykyinen)
+		for all n ∈ graafidata.naapurit(nykyinen.nykyinen) do
+			if n = maalisolmu then
+				nykyinen ← (nykyinen = n; vanhempi = nykyinen.nykyinen)
+				polku ← tyhjaLista
+				while nykyinen.vanhempi ≠ NULL do
+					polku.lisaaAlkuun(nykyinen.nykyinen)
+					nykyinen ← nykyinen.vanhempi
+				end while
+				polku.lisaaAlkuun(lahtoarvo)
+				return polku
+			end if
+			if n ∈ suljettuL.map(jasen → jasen.nykyinen) then
+				continue
+			else
+				if n ∉ avoinL.map(jasen → jasen.nykyinen) then
+					avoinL.lisaaLoppuun(nykyinen = n; vanhempi = nykyinen.nykyinen)
+					gHintaLog.lisaa(AVAIN = n; ARVO = gHintaLog[nykyinen.nykyinen] + graafidata.hinta(nykyinen.nykyinen, n))
+				else
+					if gHintaLog[n] > gHintaLog[nykyinen.nykyinen] + graafisata.hinta(nykyinen.nykyinen, n) then
+						gHintaLog[n] ← HintaLog(nykyinen.nykyinen) + graafidata.hinta(nykyinen.nykyinen, n)
+					end if
+				end if
+			end if
+		end for
+	end while
+	return NULL
+end procedure
